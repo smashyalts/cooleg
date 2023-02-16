@@ -1,6 +1,5 @@
 package playtimetop.playtimetop.PlayCommands;
 
-import co.aikar.util.Counter;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -11,17 +10,21 @@ import playtimetop.playtimetop.PlaytimeTop;
 
 import java.util.*;
 
-import static playtimetop.playtimetop.PlaytimeTop.*;
-
 public class PlaytimeTopCommand extends PlaytimeTop implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         int count = 0;
         for (Map.Entry<UUID, Long> en : timesorted.entrySet()) {
-            long time = (en.getValue() / 20);
+            long time = (en.getValue()/20);
             long timeminutes = (time / 60);
             long timehours = (timeminutes / 60);
             long timedays = (timehours / 24);
+
+            // This subtracts the time from earlier time measurement so that it doesn't show additional time.
+            timeminutes-=timehours*60;
+            timehours-=timedays*24;
+
+
             sender.sendMessage(Bukkit.getOfflinePlayer(en.getKey().toString()) + " = " + ChatColor.RED + "Days " + ChatColor.WHITE + timedays + " " + ChatColor.RED + "Hours " + ChatColor.WHITE + timehours + " " + ChatColor.RED + "Minutes " + ChatColor.WHITE + timeminutes);
             count++;
             if (count >= 10) {

@@ -16,9 +16,9 @@ public class TimeInterval extends PlaytimeTop implements Runnable {
     long playtime;
     @Override
     public void run() {
-        for(Player player : Bukkit.getOnlinePlayers()){
+        for(Player player : Bukkit.getOnlinePlayers()) {
             playtime = player.getStatistic(PLAY_ONE_TICK);
             playtimemap.put(player.getUniqueId(), playtime);
-            }
         }
     }
+}
