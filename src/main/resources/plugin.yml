@@ -2,3 +2,7 @@ name: PlaytimeTop
 version: '${project.version}'
 main: playtimetop.playtimetop.PlaytimeTop
 api-version: 1.19
+commands:
+  playtimetop:
+    usage: /<command>
+    label: playtimetop

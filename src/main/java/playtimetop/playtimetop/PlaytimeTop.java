@@ -4,9 +4,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.Statistic;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.plugin.java.JavaPlugin;
-import playtimetop.playtimetop.PlayCommands.PlaytimeTopCommand;
-import playtimetop.playtimetop.Playtimeevents.PlaytimeEvent;
-import playtimetop.playtimetop.Playtimeevents.TimeInterval;
+import playtimetop.playtimetop.playcommands.PlaytimeTopCommand;
+import playtimetop.playtimetop.playtimeevents.PlaytimeEvent;
+import playtimetop.playtimetop.playtimeevents.TimeInterval;
 import playtimetop.playtimetop.utils.EnumUtil;
 
 import java.util.*;
@@ -14,9 +14,10 @@ import java.util.*;
 import static java.util.stream.Collectors.toMap;
 import static playtimetop.playtimetop.PlaytimeTop.HashSmth.playtimemap;
 import static playtimetop.playtimetop.PlaytimeTop.HashSmth.sortByValue;
+import static playtimetop.playtimetop.PlaytimeTop.timesort.timesorted;
 
 
-public class PlaytimeTop extends JavaPlugin {
+public final class PlaytimeTop extends JavaPlugin {
 public static class HashSmth {
     public static LinkedHashMap<UUID, Long> playtimemap = new LinkedHashMap<>();
     public static final Statistic PLAY_ONE_TICK = EnumUtil.getStatistic("PLAY_ONE_MINUTE", "PLAY_ONE_TICK");
@@ -33,7 +34,9 @@ public static class HashSmth {
         return sorted;
     }
 }
-    public HashMap<UUID, Long> timesorted = sortByValue(playtimemap);
+    public static class timesort {
+        public static HashMap<UUID, Long> timesorted = sortByValue(playtimemap);
+    }
     @Override
     public void onEnable() {
         // Plugin startup logic
@@ -57,6 +60,7 @@ public static class HashSmth {
 
     private void loadTopPlayers() {
         ConfigurationSection section = getConfig().getConfigurationSection("playtimetop");
+        if (section == null) {return;}
         for (String s : section.getKeys(false)) {
             playtimemap.put(UUID.fromString(s), section.getLong(s));
         }

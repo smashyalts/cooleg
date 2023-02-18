@@ -1,4 +1,4 @@
-package playtimetop.playtimetop.PlayCommands;
+package playtimetop.playtimetop.playcommands;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -10,11 +10,11 @@ import playtimetop.playtimetop.PlaytimeTop;
 
 import java.util.*;
 
-public class PlaytimeTopCommand extends PlaytimeTop implements CommandExecutor {
+public class PlaytimeTopCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         int count = 0;
-        for (Map.Entry<UUID, Long> en : timesorted.entrySet()) {
+        for (Map.Entry<UUID, Long> en : PlaytimeTop.timesort.timesorted.entrySet()) {
             long time = (en.getValue()/20);
             long timeminutes = (time / 60);
             long timehours = (timeminutes / 60);
@@ -25,7 +25,7 @@ public class PlaytimeTopCommand extends PlaytimeTop implements CommandExecutor {
             timehours-=timedays*24;
 
 
-            sender.sendMessage(Bukkit.getOfflinePlayer(en.getKey().toString()) + " = " + ChatColor.RED + "Days " + ChatColor.WHITE + timedays + " " + ChatColor.RED + "Hours " + ChatColor.WHITE + timehours + " " + ChatColor.RED + "Minutes " + ChatColor.WHITE + timeminutes);
+            sender.sendMessage(Bukkit.getOfflinePlayer(en.getKey()).getName() + " = " + ChatColor.RED + "Days " + ChatColor.WHITE + timedays + " " + ChatColor.RED + "Hours " + ChatColor.WHITE + timehours + " " + ChatColor.RED + "Minutes " + ChatColor.WHITE + timeminutes);
             count++;
             if (count >= 10) {
                 return true;

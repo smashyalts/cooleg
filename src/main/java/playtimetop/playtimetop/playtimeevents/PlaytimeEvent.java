@@ -1,4 +1,4 @@
-package playtimetop.playtimetop.Playtimeevents;
+package playtimetop.playtimetop.playtimeevents;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
