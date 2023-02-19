@@ -49,14 +49,15 @@ public static class HashSmth {
 
     @Override
     public void onDisable() {
-        int count = 0;
-        for (Map.Entry<UUID, Long> en : timesorted.entrySet()) {
-            getConfig().set(String.valueOf(en.getKey()), en.getValue().toString());
+    int count = 0;
+       if (count >= 10) {
+           for (Map.Entry<UUID, Long> en : timesorted.entrySet()) {
+            getConfig().set(en.getKey().toString(), en.getValue().toString());
             count++;
-            if (count >= 10) return;
         // Plugin shutdown logic
         }
-    }
+           saveConfig();
+    }}
 
     private void loadTopPlayers() {
         ConfigurationSection section = getConfig().getConfigurationSection("playtimetop");

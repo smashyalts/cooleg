@@ -25,7 +25,7 @@ public class PlaytimeTopCommand implements CommandExecutor {
             timehours-=timedays*24;
 
 
-            sender.sendMessage(Bukkit.getOfflinePlayer(en.getKey()).getName() + " = " + ChatColor.RED + "Days " + ChatColor.WHITE + timedays + " " + ChatColor.RED + "Hours " + ChatColor.WHITE + timehours + " " + ChatColor.RED + "Minutes " + ChatColor.WHITE + timeminutes);
+            sender.sendMessage(Bukkit.getOfflinePlayer(en.getKey()).getName() + " = " + ChatColor.WHITE + timedays + ChatColor.RED + " Days " + ChatColor.WHITE + timehours + ChatColor.RED + " Hours "  + ChatColor.WHITE + timeminutes + ChatColor.RED + " Minutes ");
             count++;
             if (count >= 10) {
                 return true;
