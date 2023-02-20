@@ -19,7 +19,7 @@ public class TimeInterval implements Runnable {
             playtime = player.getStatistic(PLAY_ONE_TICK);
             playtimemap.put(player.getUniqueId(), playtime);
         }
-        if (count >= 10) {for (Map.Entry<UUID, Long> en : timesorted.entrySet()) {
+        if (count <= 10) {for (Map.Entry<UUID, Long> en : timesorted.entrySet()) {
             Bukkit.getServer().getPluginManager().getPlugin("PlaytimeTop").getConfig().set(String.valueOf(en.getKey()), en.getValue().toString());
             count++;
             Bukkit.getServer().getPluginManager().getPlugin("PlaytimeTop").saveConfig();

@@ -11,9 +11,9 @@ import playtimetop.playtimetop.PlaytimeTop;
 import java.util.*;
 
 public class PlaytimeTopCommand implements CommandExecutor {
+    int count = 0;
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-        int count = 0;
         for (Map.Entry<UUID, Long> en : PlaytimeTop.timesort.timesorted.entrySet()) {
             long time = (en.getValue()/20);
             long timeminutes = (time / 60);
@@ -27,7 +27,7 @@ public class PlaytimeTopCommand implements CommandExecutor {
 
             sender.sendMessage(Bukkit.getOfflinePlayer(en.getKey()).getName() + " = " + ChatColor.WHITE + timedays + ChatColor.RED + " Days " + ChatColor.WHITE + timehours + ChatColor.RED + " Hours "  + ChatColor.WHITE + timeminutes + ChatColor.RED + " Minutes ");
             count++;
-            if (count >= 10) {
+            if (count <= 10) {
                 return true;
             }
         }

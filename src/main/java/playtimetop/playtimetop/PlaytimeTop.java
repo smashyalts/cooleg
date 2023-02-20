@@ -45,19 +45,21 @@ public static class HashSmth {
         getCommand("playtimetop").setExecutor(new PlaytimeTopCommand());
         saveDefaultConfig();
         loadTopPlayers();
+        Bukkit.getLogger().info(playtimemap.size() + " test");
     }
+    int count = 0;
 
     @Override
     public void onDisable() {
-    int count = 0;
-       if (count >= 10) {
+       if (count <= 10) {
            for (Map.Entry<UUID, Long> en : timesorted.entrySet()) {
             getConfig().set(en.getKey().toString(), en.getValue().toString());
             count++;
+            saveConfig();
         // Plugin shutdown logic
         }
-           saveConfig();
-    }}
+    }
+    }
 
     private void loadTopPlayers() {
         ConfigurationSection section = getConfig().getConfigurationSection("playtimetop");
